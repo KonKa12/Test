@@ -1,0 +1,238 @@
+[gd_scene format=3 uid="uid://boipwalxtlesr"]
+
+[ext_resource type="Texture2D" uid="uid://cs12bng7wiq0u" path="res://images (2).jpg" id="1_a202f"]
+[ext_resource type="Script" uid="uid://dmw4jk52fya86" path="res://character_body_3d.gd" id="2_a0tk4"]
+[ext_resource type="ArrayMesh" uid="uid://ddlfc52tnm45t" path="res://hands.obj" id="2_noarx"]
+[ext_resource type="ArrayMesh" uid="uid://c0us8x2nm3l8a" path="res://FinalBaseMesh.obj" id="3_a0tk4"]
+[ext_resource type="Texture2D" uid="uid://42awgmh1rh4u" path="res://images (1).jpg" id="5_i5arm"]
+[ext_resource type="Texture2D" uid="uid://dpyqw2yi7ne78" path="res://icon.svg" id="6_wc5p8"]
+[ext_resource type="ArrayMesh" uid="uid://bw5qtdc4u5vu8" path="res://Sting-Sword-lowpoly.obj" id="7_6iypd"]
+[ext_resource type="Script" uid="uid://cvujhxcswuus5" path="res://gun.gd" id="7_wc5p8"]
+[ext_resource type="PackedScene" uid="uid://ck1xho0c32tan" path="res://bullet.tscn" id="8_jsk3o"]
+[ext_resource type="ArrayMesh" uid="uid://dapt3erf805jm" path="res://Gun.obj" id="9_4arys"]
+[ext_resource type="Texture2D" uid="uid://carbcrernlfwu" path="res://unnamed.jpg" id="11_tereu"]
+[ext_resource type="Texture2D" uid="uid://dk5cj5vymlr60" path="res://images.jpg" id="12_imku0"]
+[ext_resource type="ArrayMesh" uid="uid://joh5que1hd0i" path="res://mount.blend1.obj" id="13_wlxy5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4arys"]
+albedo_texture = ExtResource("5_i5arm")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6iypd"]
+albedo_texture = ExtResource("5_i5arm")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tereu"]
+albedo_texture = ExtResource("6_wc5p8")
+
+[sub_resource type="Environment" id="Environment_i5arm"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_i5arm"]
+font_size = 40
+font_color = Color(0.9861209, 0.22872609, 0.96156305, 1)
+
+[sub_resource type="GDScript" id="GDScript_jsk3o"]
+script/source = "extends MeshInstance3D
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4xowi"]
+albedo_texture = ExtResource("1_a202f")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4xowi"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_a202f"]
+
+[sub_resource type="GDScript" id="GDScript_6iypd"]
+script/source = "extends MeshInstance3D
+
+
+@onready var sword = $Sword
+var target_rotation = Vector3.ZERO
+var rotating = false
+
+func _process(delta):
+	if Input.is_action_just_pressed(\"mouse_left\") and not rotating:
+		target_rotation = sword.rotation + Vector3(0, 0, deg_to_rad(90))
+		rotating = true
+
+	if rotating:
+		sword.rotation = sword.rotation.linear_interpolate(target_rotation, 5 * delta)
+		if sword.rotation.is_equal_approx(target_rotation):
+			rotating = false
+	
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cdqbm"]
+albedo_texture = ExtResource("11_tereu")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3v7ru"]
+albedo_texture = ExtResource("12_imku0")
+
+[node name="main" type="Node3D" unique_id=194898835]
+
+[node name="House" type="Node" parent="." unique_id=1495889277]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="House" unique_id=826553786]
+transform = Transform3D(-0.9998977, -0.014293669, 0, 0.014293669, -0.9998977, 0, 0, 0, 0.6546114, 0.00450325, 2.778685, 31.156483)
+use_collision = true
+size = Vector3(15, 5, 1)
+material = SubResource("StandardMaterial3D_4arys")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="House" unique_id=1649271362]
+transform = Transform3D(-0.9998977, -0.014293669, 0, 0.014293669, -0.9998977, 0, 0, 0, 0.6546114, 1.0557263, 2.7636578, 20.42686)
+use_collision = true
+size = Vector3(12.897339, 5, 1)
+material = SubResource("StandardMaterial3D_4arys")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="House" unique_id=1622636793]
+transform = Transform3D(-0.040005647, -0.000571886, -0.65408725, 0.01429367, -0.9998977, 0, -0.999097, -0.014282224, 0.02619083, -7.492692, 2.9891415, 23.456259)
+use_collision = true
+size = Vector3(15, 5, 1)
+material = SubResource("StandardMaterial3D_4arys")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="House" unique_id=1903253271]
+transform = Transform3D(-3.840288, -0.051600177, 0, 0.046384186, -4.272136, 0, 0, 0, 0.4058726, 5.371401, 2.448524, 30.65942)
+use_collision = true
+material = SubResource("StandardMaterial3D_6iypd")
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="House" unique_id=43850358]
+transform = Transform3D(-3.8297627, -0.051458754, 0.030029157, 0.046384186, -4.2721357, 0, 0.28413004, 0.0038177245, 0.4047602, -6.3757243, 4.1108522, 20.396027)
+use_collision = true
+size = Vector3(0.49768066, 0.34472656, 1)
+material = SubResource("StandardMaterial3D_6iypd")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="House" unique_id=1514122187]
+transform = Transform3D(0.035366848, 0.0005055743, 0.65420175, 0.014293668, -0.9998977, 1.7612006e-10, 0.99927187, 0.014284723, -0.023153894, 7.5866146, 2.811315, 24.073639)
+use_collision = true
+size = Vector3(15, 5, 1)
+material = SubResource("StandardMaterial3D_4arys")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="House" unique_id=1649827978]
+transform = Transform3D(0.13583276, 0.001825125, 0.40561864, 0.046384178, -4.2721353, 7.844794e-12, 3.8378842, 0.051567886, -0.01435589, 7.095847, 2.3552747, 18.44011)
+use_collision = true
+material = SubResource("StandardMaterial3D_6iypd")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="House" unique_id=1164469586]
+transform = Transform3D(15.964633, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26404238, 24.685741)
+use_collision = true
+size = Vector3(1, 0.39208984, 16.394562)
+material = SubResource("StandardMaterial3D_tereu")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="House" unique_id=1760698492]
+transform = Transform3D(0.99771035, 0, 0.067632206, 0, 1, 0, -0.067632206, 0, 0.99771035, 0.20352083, 5.1290646, 25.637466)
+size = Vector3(15.365051, 0.54248047, 12.5216675)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="House" unique_id=1751149197]
+transform = Transform3D(-0.9828067, 0.18351875, 0.020296782, 0.17485924, 0.9604156, -0.21685502, -0.059290312, -0.20957746, -0.9759928, -0.40956116, 4.592564, 25.138765)
+light_color = Color(0.42567575, 0.22686705, 0.26869762, 1)
+light_energy = 2.163
+light_indirect_energy = 0.854
+light_volumetric_fog_energy = 5.509
+light_size = 1.0
+
+[node name="Lamb" type="CSGBox3D" parent="." unique_id=74204943]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.674257, 2.4638672, 7.639415)
+size = Vector3(0.46875, 5.9277344, 0.49658203)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lamb" unique_id=1770893429]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.4378061, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1840323258]
+environment = SubResource("Environment_i5arm")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=970441182]
+rotation = -0.6859144
+transform = Transform2D(0.7738402, -0.6333809, 0.6333809, 0.7738402, 0, 0)
+
+[node name="Crosshair" type="Label" parent="CanvasLayer" unique_id=1552458307]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -123.28833
+offset_top = -416.0876
+offset_right = 448.71167
+offset_bottom = 945.91235
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.6802712
+text = "+"
+label_settings = SubResource("LabelSettings_i5arm")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Stat" type="Label" parent="CanvasLayer" unique_id=1970758035]
+offset_left = 443.54828
+offset_top = 378.54712
+offset_right = 490.54828
+offset_bottom = 401.54712
+rotation = 0.34711418
+scale = Vector2(7.78807, 22.194359)
+text = "SLATT"
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=762322063]
+transform = Transform3D(1, 0, 0, 0, -0.14141962, 0.98994976, 0, -0.98994976, -0.14141962, 0, 21.080593, 0)
+light_color = Color(0.79110616, 0.5888087, 0.31243953, 1)
+shadow_enabled = true
+
+[node name="FinalBaseMesh" type="MeshInstance3D" parent="." unique_id=645964206]
+transform = Transform3D(0.38954076, 0, 0, 0, 0.24885522, 0, 0, 0, 0.38123634, 10.127293, 0.28319514, 15.836318)
+mesh = ExtResource("3_a0tk4")
+script = SubResource("GDScript_jsk3o")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1070983321]
+use_collision = true
+size = Vector3(50, 0.5, 50)
+material = SubResource("StandardMaterial3D_4xowi")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1745797657]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2161412, 0)
+script = ExtResource("2_a0tk4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=1946581930]
+shape = SubResource("CapsuleShape3D_4xowi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/CollisionShape3D" unique_id=336895683]
+mesh = SubResource("CapsuleMesh_a202f")
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D" unique_id=1137678529]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.047, 0.56999993, -0.13948512)
+
+[node name="Hands" type="MeshInstance3D" parent="CharacterBody3D/Camera3D" unique_id=1207731166]
+transform = Transform3D(1, 0, 0, 0, 0.2231651, 0.9747806, 0, -0.9747806, 0.2231651, 0, -0.44092786, -0.73006654)
+mesh = ExtResource("2_noarx")
+
+[node name="Sword" type="MeshInstance3D" parent="CharacterBody3D/Camera3D" unique_id=171024242]
+transform = Transform3D(0.01685224, 0, 0, 0, 0.040168066, -0.019002873, 0, 0.07432337, 0.010270103, -0.2943374, -0.21871042, -0.9676049)
+mesh = ExtResource("7_6iypd")
+script = SubResource("GDScript_6iypd")
+
+[node name="Gun" type="Node3D" parent="CharacterBody3D/Camera3D" unique_id=291864440]
+script = ExtResource("7_wc5p8")
+bullet_scene = ExtResource("8_jsk3o")
+
+[node name="Muzzle" type="Marker3D" parent="CharacterBody3D/Camera3D/Gun" unique_id=1257465870]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.2733358)
+
+[node name="ActualGun" type="MeshInstance3D" parent="CharacterBody3D/Camera3D" unique_id=146284399]
+transform = Transform3D(-0.06249434, 0, -0.9980453, 0, 1, 0, 0.9980453, 0, -0.06249434, 0.22648865, -0.28142822, -0.81192344)
+mesh = ExtResource("9_4arys")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=729609534]
+transform = Transform3D(-0.0012915567, 1.4031565, -0.098418236, 0, 0.07302065, 1.8911967, 0.9999991, 0.0018122577, -0.00012711283, 3.7316117, 3.3014438, -8.731365)
+size = Vector3(1, 5.632263, 3.0302734)
+material = SubResource("StandardMaterial3D_cdqbm")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=2132412866]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -703.21814, -0.6867676, 77.40076)
+use_collision = true
+size = Vector3(1356.4346, 0.62646484, 1491.1018)
+material = SubResource("StandardMaterial3D_3v7ru")
+
+[node name="Mount_blend1" type="MeshInstance3D" parent="." unique_id=1461122622]
+transform = Transform3D(5.175003, 0, 0, 0, 3.6937115, 0, 0, 0, 2.0632834, -57.055847, -0.36795282, -4.1511707)
+mesh = ExtResource("13_wlxy5")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=1636084205]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.698315, 0.5169678, 0)
+use_collision = true
+size = Vector3(3.6621094, 2.0339355, 1)
